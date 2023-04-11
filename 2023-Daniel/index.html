@@ -266,25 +266,27 @@
 </audio>
 
 <script>
-  var audio = document.getElementById('bday-audio');
-  
-  if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-    // Show play/pause button on iOS
-    var button = document.createElement('button');
-    button.textContent = 'Play Song/Pause';
-    button.onclick = function() {
-      if (audio.paused || audio.ended) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
-    };
-    document.body.appendChild(button);
-  } else {
-    // Loop audio on desktop
-    audio.loop = true;
-    audio.play();
-  }
+     var audio = document.getElementById('bday-audio');
+    var ua = navigator.userAgent.toLowerCase();
+    var isIOS = ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1;
+    
+    if (isIOS) {
+      // Show play/pause button on iOS
+      var button = document.createElement('button');
+      button.textContent = 'Play Song/Pause';
+      button.onclick = function() {
+        if (audio.paused || audio.ended) {
+          audio.play();
+        } else {
+          audio.pause();
+        }
+      };
+      document.body.appendChild(button);
+    } else {
+      // Loop audio on desktop
+      audio.loop = true;
+      audio.play();
+    }
 </script>
 
 
