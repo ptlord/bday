@@ -261,8 +261,20 @@
       });
     </script>
 </div>
-<audio src="happy-birthday-music-box-version-117317.mp3" autoplay loop>
+<audio id="bday-audio" src="happy-birthday-music-box-version-117317.mp3" autoplay loop>
   Your browser does not support the audio element.
 </audio>
+<script>
+  var audio = document.getElementById('bday-audio');
+  
+  function togglePlay() {
+    if (audio.paused || audio.ended) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  }
+</script>
+
   </body>
 </html>
