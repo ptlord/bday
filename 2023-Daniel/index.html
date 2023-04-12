@@ -265,30 +265,26 @@
   Your browser does not support the audio element.
 </audio>
 
+<button onclick="togglePlay()">Play Song/Pause</button>
 <script>
-     var audio = document.getElementById('bday-audio');
-    var ua = navigator.userAgent.toLowerCase();
-    var isIOS = ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1;
-    
-    if (isIOS) {
-      // Show play/pause button on iOS
-      var button = document.createElement('button');
-      button.textContent = 'Play Song/Pause';
-      button.onclick = function() {
-        if (audio.paused || audio.ended) {
-          audio.play();
-        } else {
-          audio.pause();
-        }
-      };
-      document.body.appendChild(button);
+  var audio = document.getElementById('bday-audio');
+  var pausedByUser = false;
+  
+  function togglePlay() {
+    if (audio.paused || audio.ended) {
+      audio.play();
     } else {
-      // Loop audio on desktop
-      audio.loop = true;
+      audio.pause();
+      pausedByUser = true;
+    }
+  }
+  
+  audio.addEventListener('ended', function() {
+    if (!pausedByUser) {
+      audio.currentTime = 0;
       audio.play();
     }
+  });
 </script>
-
-
   </body>
 </html>
